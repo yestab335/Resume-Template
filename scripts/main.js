@@ -5,9 +5,11 @@
     on_page_load()
   });
 
-  // Called Function When Page Loads
+  /**
+   * Function gets called when page is loaded.
+   */
   function on_page_load() {
-    // Scroll Animations
+    // Initialize On-scroll Animations
     AOS.init({
       anchorPlacement: 'top-left',
       duration: 600,
@@ -18,7 +20,9 @@
     });
   }
 
-  // Navbar Effects and Scrolltop Buttons Upon scrolling
+  /**
+   * Navbar effects and scrolltop buttons upon scrolling
+   */
   const navbar = document.getElementById('header-nav')
   var body = document.getElementsByTagName("body")[0]
   const scrollTop = document.getElementById('scrolltop')
@@ -36,7 +40,9 @@
     }
   };
 
-  // Masonry Grid
+  /**
+   * Masonry Grid
+   */
   var elem = document.querySelector('.grid');
   if(elem) {
     imagesLoaded(elem, function() {
@@ -48,31 +54,41 @@
     })
   }
 
-  // Picture Popup for Images and Videos in Masonry
-  document.querySelectorAll("[data-bigpicture]").forEach((function(e) {
-    e.addEventListener("click", function(t) {
-      t.preventDefault();
-      const data = JSON.parse(e.dataset.bigpicture)
-      BigPicture ({
+  /**
+   * Big Picture Popup for images and videos
+   */
+   document.querySelectorAll("[data-bigpicture]").forEach((function(e) {
+     e.addEventListener("click", (function(t){
+       t.preventDefault();
+       const data =JSON.parse(e.dataset.bigpicture)
+       BigPicture({
         el: t.target,
         ...data
       })
-    })
+     })
+    )
   }))
 
-  // Big Picture Popup for Photo Gallary
-  document.querySelectorAll(".bp-gallery a").forEach((function(e) {
-    var caption = e.querySelectorAll('figcaption')
+  /**
+   * Big Picture Popup for Photo Gallary
+   */
+   document.querySelectorAll(".bp-gallery a").forEach((function(e) {
+    var caption = e.querySelector('figcaption')
     var img = e.querySelector('img')
     // set the link present on the item to the caption in full view
-    img.dataset.caption = '<a class="link-light" target="_blank" href=""' + e.href + '">' + caption.innerHTML + '</a>';
+    img.dataset.caption = '<a class="link-light" target="_blank" href="' + e.href + '">' + caption.innerHTML + '</a>';
     window.console.log(caption, img)
-    e.addEventListener("click", (function(t) {
-      t.preventDefault();
-      BigPicture({
+     e.addEventListener("click", (function(t){
+       t.preventDefault();
+       BigPicture({
         el: t.target,
         gallery: '.bp-gallery',
       })
-    }))
+     })
+    )
   }))
-})
+
+  // Add your javascript here
+
+
+})();
